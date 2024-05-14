@@ -23,9 +23,12 @@ class TImages{
   static const String deliveredEmailIllustration = "assets/images/animations/sammy-line-man-receives-a-mail.png";
   static const String verifyIllustration = "assets/images/animations/sammy-line-travel-backpack-with-passport-and-air-ticket.gif";
 
+  // -- Profile
+  static const String user = "assets/images/user/user.png";
+
   // Category Icons
   static const String sportIcon = "assets/icons/categories/icons8-bowling-64.png";
-  static const String clothIcon = "assets/icons/categories/icons8-tailors-dummy-64.png";
+  static const String clothIcon = "assets/icons/categories/icons8-cloth-50.png";
   static const String shoeIcon = "assets/icons/categories/icons8-shoes-64.png";
   static const String cosmeticsIcon = "assets/icons/categories/icons8-cosmetics-64.png";
   static const String animalIcon = "assets/icons/categories/icons8-dog-heart-64.png";
@@ -42,13 +45,13 @@ class TImages{
   //Products
   static const String productImage1 = "assets/images/products/nike-shoes.png";
   static const String productImage2 = "assets/images/products/product-1.png";
-  static const String productImage3 = "assets/images/products/product-jacket.png";
+  static const String productImage3 = "assets/images/products/nike-3.png";
   static const String productImage4 = "assets/images/products/product-jeans.png";
   static const String productImage5 = "assets/images/products/product-shirt.png";
   static const String productImage6 = "assets/images/products/product-slippers.png";
-  static const String productImage7 = "assets/images/products/Nike Air-Jordon-BlackRed.png";
-  static const String productImage8 = "assets/images/products/Nike Air-Jordon-Orange.png";
-  static const String productImage9 = "assets/images/products/Nike Air-Jordon-whiteMagenta.png";
+  static const String productImage7 = "assets/images/products/Nike-Air-Jordon-BlackRed.png";
+  static const String productImage8 = "assets/images/products/Nike-Air-Jordon-Orange.png";
+  static const String productImage9 = "assets/images/products/Nike-Air-Jordon-whiteMagenta.png";
   static const String productImage10 = "assets/images/products/Nike-Air-Jordon-White-Red.png";
   static const String productImage11 = "assets/images/products/samsung_s9_mobile.png";
   static const String productImage12 = "assets/images/products/samsung_59_mobile_with-back.png";

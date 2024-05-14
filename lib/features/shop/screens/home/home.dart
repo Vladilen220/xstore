@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TPrimaryHeaderContainer(
+            const TPrimaryHeaderContainer(
               child: Column(
                 children: [
                   /// App Bar
@@ -50,6 +50,7 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                   SizedBox(height: TSizes.spaceBtwSections),
                 ],
               ),
             ),
@@ -65,6 +66,10 @@ class HomeScreen extends StatelessWidget {
                     TImages.promoBanner2,
                     TImages.promoBanner3
                   ]),
+                  const SizedBox(height: TSizes.spaceBtwSections),
+
+                  /// Heading
+                   TSectionHeading(title: 'Popular Products', onPressed: (){},),
                   const SizedBox(height: TSizes.spaceBtwSections),
 
                   /// Popular Products

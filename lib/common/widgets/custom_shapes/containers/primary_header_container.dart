@@ -13,7 +13,7 @@ class TPrimaryHeaderContainer extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) {
+ /* Widget build(BuildContext context) {
     return TCurvedEdgeWidget(
       child: Container(
           color: TColors.primary,
@@ -29,6 +29,20 @@ class TPrimaryHeaderContainer extends StatelessWidget {
             ),
             ),
       ),
+    );
+  }*/
+  Widget build(BuildContext context) {
+    return TCurvedEdgeWidget(
+      child: Container(
+        color: TColors.primary,
+          child: Stack(
+            children: [
+              Positioned(top: -150, right:-250 ,child: TCircularContainer(backgroundColor: TColors.textWhite.withOpacity(0.1))),
+              Positioned(top: 100, right:-300 ,child: TCircularContainer(backgroundColor: TColors.textWhite.withOpacity(0.1))),
+              child,
+            ],
+          ),
+        ),
     );
   }
 }
