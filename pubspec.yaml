@@ -32,6 +32,7 @@ dependencies:
 
 
   #Product Specific
+  readmore: ^2.2.0
 
 
 
