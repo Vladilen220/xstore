@@ -33,6 +33,7 @@ dependencies:
 
   #Product Specific
   readmore: ^2.2.0
+  flutter_rating_bar: ^4.0.1
 
 
 
@@ -53,11 +54,13 @@ flutter:
     - assets/logos/
     - assets/images/on_boarding_images/
     - assets/icons/brands/
+    - assets/icons/payment_methods/
     - assets/images/user/user.png
     - assets/images/banners/
     - assets/images/animations/
     - assets/icons/categories/
     - assets/images/products/
+    - assets/images/reviews/
 
  #----------------- LOCAL assets ----------------------#
   fonts:

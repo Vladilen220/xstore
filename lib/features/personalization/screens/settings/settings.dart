@@ -5,10 +5,13 @@ import 'package:xstore/common/widgets/appbar/appbar.dart';
 import 'package:xstore/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:xstore/common/widgets/list_tiles/settings_menu_tile.dart';
 import 'package:xstore/common/widgets/texts/section_heading.dart';
+import 'package:xstore/features/personalization/screens/address/address.dart';
+import 'package:xstore/features/shop/screens/order/order.dart';
 import 'package:xstore/utils/constants/sizes.dart';
 
 import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
 import '../../../../utils/constants/colors.dart';
+import '../../../shop/screens/cart/cart.dart';
 import '../profile/profile.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -48,13 +51,13 @@ class SettingsScreen extends StatelessWidget {
                   const TSectionHeading(title: 'Account Settings', showActionButton: false),
                   const SizedBox(height: TSizes.spaceBtwItems),
 
-                  TSettingsMenuTile(icon: Iconsax.safe_home, title: 'My Addresses', subTitle: 'Set Shopping delivery address', onTap: (){}),
-                  TSettingsMenuTile(icon: Iconsax.shopping_cart, title: 'My Cart', subTitle: 'Add, remove products and move to checkout', onTap: (){}),
-                  TSettingsMenuTile(icon: Iconsax.bag_tick, title: 'My Orders', subTitle: 'In-progress and Completed Orders', onTap: (){}),
+                  TSettingsMenuTile(icon: Iconsax.safe_home, title: 'My Addresses', subTitle: 'Set Shopping delivery address', onTap: ()=> Get.to(() => const UserAddressScreen())),
+                  TSettingsMenuTile(icon: Iconsax.shopping_cart, title: 'My Cart', subTitle: 'Add, remove products and move to checkout', onTap: ()=> Get.to(() => const CartScreen())),
+                  TSettingsMenuTile(icon: Iconsax.bag_tick, title: 'My Orders', subTitle: 'In-progress and Completed Orders', onTap: ()=> Get.to(() => const OrderScreen())),
                   TSettingsMenuTile(icon: Iconsax.bank, title: 'Bank Account', subTitle: 'Withdraw balance to registered bank account', onTap: (){}),
-                  TSettingsMenuTile(icon: Iconsax.bag_tick, title: 'My Coupons', subTitle: 'List of all discounted coupons', onTap: (){}),
-                  TSettingsMenuTile(icon: Iconsax.bag_tick, title: 'Notifications', subTitle: 'Set any kind of notification message', onTap: (){}),
-                  TSettingsMenuTile(icon: Iconsax.bag_tick, title: 'Account Privacy', subTitle: 'Manage data usage and connected accounts', onTap: (){}),
+                  TSettingsMenuTile(icon: Iconsax.receipt_discount, title: 'My Coupons', subTitle: 'List of all discounted coupons', onTap: (){}),
+                  TSettingsMenuTile(icon: Iconsax.notification, title: 'Notifications', subTitle: 'Set any kind of notification message', onTap: (){}),
+                  TSettingsMenuTile(icon: Icons.privacy_tip_outlined, title: 'Account Privacy', subTitle: 'Manage data usage and connected accounts', onTap: (){}),
 
                   /// -- App Settings
                   const SizedBox(height: TSizes.spaceBtwSections),
