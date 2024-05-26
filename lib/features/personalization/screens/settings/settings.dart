@@ -10,6 +10,7 @@ import 'package:xstore/features/shop/screens/order/order.dart';
 import 'package:xstore/utils/constants/sizes.dart';
 
 import '../../../../common/widgets/list_tiles/user_profile_tile.dart';
+import '../../../../data/repositories/authenitcation/authentication_repository.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../shop/screens/cart/cart.dart';
 import '../profile/profile.dart';
@@ -86,7 +87,7 @@ class SettingsScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwSections),
                   SizedBox(
                     width: double.infinity,
-                    child: OutlinedButton(onPressed: (){}, child: const Text('Logout')),
+                    child: OutlinedButton(onPressed: () => AuthenticationRepository.instance.logout(), child: const Text('Logout')),
                   ),
                   const SizedBox(height: TSizes.spaceBtwSections * 2.5),
                 ],

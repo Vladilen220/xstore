@@ -21,6 +21,7 @@ class TProductCardVertical extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
+
     return GestureDetector(
       onTap: () => Get.to(() => const ProductDetailScreen()),
       child: Container(
@@ -57,7 +58,8 @@ class TProductCardVertical extends StatelessWidget {
                   const Positioned(
                     top: 0,
                       right: 0,
-                      child:  TCircularIcon(icon: Iconsax.heart5, color: Colors.red,))
+                      child:  TCircularIcon(icon: Iconsax.heart5, color: Colors.red,)
+                  ),
                 ],
               ),
             ),
@@ -94,7 +96,7 @@ class TProductCardVertical extends StatelessWidget {
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(TSizes.cardRadiusMd),
                           bottomRight: Radius.circular(TSizes.productImageRadius)
-                      )
+                      ),
                   ),
                   child: const SizedBox(
                       width: TSizes.iconLg * 1.2,
