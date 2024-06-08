@@ -5,8 +5,8 @@ class UserModel{
   final String id;
   String firstName;
   String lastName;
-  final String username;
-  final String email;
+  String username;
+  String email;
   String phoneNumber;
   String profilePicture;
 
@@ -32,7 +32,7 @@ class UserModel{
     String lastName = nameParts.length > 1 ? nameParts[1].toLowerCase() : " ";
 
     String camelCaseUserName = "$firstName$lastName";
-    String usernameWithPrefix = "cwt_$camelCaseUserName";
+    String usernameWithPrefix = camelCaseUserName;
     return usernameWithPrefix;
   }
   static UserModel empty() => UserModel(id: '', firstName: '', lastName: '', username: '', email: '', phoneNumber: '', profilePicture: '');

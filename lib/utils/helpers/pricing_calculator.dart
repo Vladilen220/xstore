@@ -1,3 +1,5 @@
+import 'package:xstore/features/shop/models/cart_item_model.dart';
+
 class TPricingCalculator {
   static double calculateTotalPrice(double productPrice, String location) {
     double taxRate = getTaxRateForLocation(location);
@@ -33,4 +35,8 @@ class TPricingCalculator {
     // Calculate the shipping cost based on various factors like distance, weight, etc.
     return 5.00; // Example shipping cost of $5
   }
+
+  // static double calculateCartTotal(CartModel cart){
+  //   return cart.items.map((e) => e.pice).fold(0,(previousPrice, currentPrice) => previousPrice + (currentPrice ?? 0));
+  // }
 }

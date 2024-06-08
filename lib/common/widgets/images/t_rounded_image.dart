@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/constants/sizes.dart';
+import '../shimmers/shimmer.dart';
 
 class TRoundedImage extends StatelessWidget {
   const TRoundedImage({
@@ -29,7 +31,43 @@ class TRoundedImage extends StatelessWidget {
   final double borderRadius;
 
   @override
+  @override
   Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        width: width,
+        height: height,
+        padding: padding,
+        decoration: BoxDecoration(
+            border: border,
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(borderRadius)),
+        child: ClipRRect(
+          borderRadius: applyImageRadius
+              ? BorderRadius.circular(borderRadius)
+              : BorderRadius.zero,
+          child: isNetworkImage
+              ? CachedNetworkImage(
+            fit: fit,
+            imageUrl: imageUrl,
+            progressIndicatorBuilder:
+                (context, url, downloadProgress) =>
+                TShimmerEffect(
+                    width: width ?? double.infinity,
+                    height: height ?? 158),
+            errorWidget: (context, url, error) =>
+            const Icon(Icons.error),
+          ) // CachedNetworkImage
+              : Image(
+            fit: fit,
+            image: AssetImage(imageUrl),
+          ), // Image
+        ), // ClipRRect
+      ), // Container
+    ); // GestureDetector
+  }
+  /*Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
@@ -43,5 +81,5 @@ class TRoundedImage extends StatelessWidget {
         ),
       ),
     );
-  }
+  }*/
 }

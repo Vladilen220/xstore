@@ -13,7 +13,7 @@ class TFullScreenLoader {
       builder: (_) => PopScope(
         canPop: false,
         child: Container(
-          color: THelperFunctions.isDarkMode(Get.context!) ? TColors.dark : TColors.light,
+          color: THelperFunctions.isDarkMode() ? TColors.dark : TColors.light,
           width: double.infinity,
           height: double.infinity,
           child: Column(

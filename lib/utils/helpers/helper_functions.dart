@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:xstore/utils/helpers/theme_controller.dart';
 
 class THelperFunctions {
   static Color? getColor(String value) {
@@ -77,9 +78,13 @@ class THelperFunctions {
     }
   }
 
-  static bool isDarkMode(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.dark;
+  static bool isDarkMode() {
+    final ThemeController themeController = Get.find();
+    return themeController.isDarkMode;
   }
+  // static bool isDarkMode(BuildContext context) {
+  //   return Theme.of(context).brightness == Brightness.dark;
+  // }
 
   static Size screenSize() {
     return MediaQuery.of(Get.context!).size;

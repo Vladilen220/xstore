@@ -8,12 +8,14 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:xstore/features/authentication/screens/login/login.dart';
 import 'package:xstore/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:xstore/features/authentication/screens/signup/verify_email.dart';
+import 'package:xstore/utils/local_storage/storage_utility.dart';
 
 import '../../../navigation_menu.dart';
 import '../../../utils/exceptions/firebase_auth_exceptions.dart';
 import '../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../utils/exceptions/format_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
+import '../user/user_repository.dart';
 
 class AuthenticationRepository extends GetxController{
   static AuthenticationRepository get instance => Get.find();
@@ -21,6 +23,9 @@ class AuthenticationRepository extends GetxController{
   /// Variables
  final deviceStorage = GetStorage();
  final _auth = FirebaseAuth.instance;
+
+  /// Get Authenticated User Data
+  User? get authUser => _auth.currentUser!;
 
   /// Called from main.dart on app launch
   @override
@@ -37,6 +42,9 @@ class AuthenticationRepository extends GetxController{
     if(user != null) {
       // If user is logged in
       if (user.emailVerified) {
+        // Initialize User Specific Storage
+        await TLocalStorage.init(user.uid);
+
         // if user email verified, navigate to main shop menu
         Get.offAll(() => const NavigationMenu());
       } else {
@@ -127,6 +135,24 @@ class AuthenticationRepository extends GetxController{
   }
 
   /// [ReAuthenticate] - ReAuthenticate User
+  Future<void> reAuthenticateWithEmailAndPassword(String email, String password) async {
+    try {
+      // Create a credential
+      AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
+      // ReAuthenticate
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
 
 /* --------------------- Federated identity & social sign-in ---------------------*/
 
@@ -182,4 +208,20 @@ class AuthenticationRepository extends GetxController{
     }
   }
 /// DELETE USER - Remove user Auth and FireStore Account.
+  Future<void> deleteAccount() async {
+    try {
+      await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
+      await _auth.currentUser?.delete();
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
 }

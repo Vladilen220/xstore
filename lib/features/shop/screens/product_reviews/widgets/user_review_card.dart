@@ -12,7 +12,7 @@ class UserReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final dark = THelperFunctions.isDarkMode();
     return Column(
       children: [
         Row(

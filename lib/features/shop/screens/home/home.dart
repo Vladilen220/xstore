@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:xstore/common/widgets/layouts/grid_layout.dart';
+import 'package:xstore/common/widgets/shimmers/vertical_product_shimmer.dart';
+import 'package:xstore/features/shop/controllers/product/product_controller.dart';
 import 'package:xstore/features/shop/screens/all_products/all_products.dart';
 import 'package:xstore/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:xstore/features/shop/screens/home/widgets/home_categories.dart';
@@ -17,10 +20,11 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
+
     return Scaffold(
-      body: SingleChildScrollView(
+      body: Obx(() => SingleChildScrollView(
         child: Column(
           children: [
             const TPrimaryHeaderContainer(
@@ -31,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: TSizes.spaceBtwSections),
 
                   /// Search Bar
-                  TSearchContainer(text: 'Search in Store'),
+                  //  TSearchContainer(text: 'Search in Store'),
                   SizedBox(height: TSizes.spaceBtwSections),
 
                   /// Categories
@@ -52,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                   SizedBox(height: TSizes.spaceBtwSections),
+                  SizedBox(height: TSizes.spaceBtwSections),
                 ],
               ),
             ),
@@ -63,25 +67,36 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   /// Promo slider
-                  const TPromoSlider(banners: [
-                    TImages.promoBanner1,
-                    TImages.promoBanner2,
-                    TImages.promoBanner3
-                  ]),
+                  const TPromoSlider(),
                   const SizedBox(height: TSizes.spaceBtwSections),
 
                   /// Heading
-                   TSectionHeading(title: 'Popular Products', onPressed: () => Get.to(() => const AllProducts())),
+                  TSectionHeading(
+                    title: 'Popular Products',
+                    onPressed: () => Get.to(() => AllProducts(
+                      title: 'Popular Products',
+                      //query: FirebaseFirestore.instance.collection('Products').where('IsFeatured',isEqualTo: true).limit(6),
+                      futureMethod: controller.fetchAllFeaturedProducts(),
+                    )),
+                  ),
                   const SizedBox(height: TSizes.spaceBtwSections),
 
                   /// Popular Products
-                  TGridLayout(itemCount: 2, itemBuilder: (_, index) => const TProductCardVertical())
+                  if (controller.isLoading.value)
+                    const TVerticalProductShimmer()
+                  else if (controller.featuredProducts.isEmpty)
+                    Center(child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium))
+                  else
+                    TGridLayout(
+                      itemCount: controller.featuredProducts.length,
+                      itemBuilder: (_, index) => TProductCardVertical(product: controller.featuredProducts[index]),
+                    ),
                 ],
               ),
             ),
           ],
         ),
-      ),
+      )),
     );
   }
 }

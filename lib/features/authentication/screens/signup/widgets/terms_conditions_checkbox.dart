@@ -16,7 +16,7 @@ class TTermsAndConditionCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = SignupController.instance;
-    final dark = THelperFunctions.isDarkMode(context);
+    final dark = THelperFunctions.isDarkMode();
 
     return Row(
       children: [

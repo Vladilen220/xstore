@@ -11,22 +11,27 @@ import 'package:xstore/features/shop/screens/product_details/widgets/rating_shar
 import 'package:xstore/features/shop/screens/product_reviews/product_reviews.dart';
 import 'package:xstore/utils/constants/sizes.dart';
 
+import '../../../../utils/constants/enums.dart';
 import '../../../../utils/helpers/helper_functions.dart';
+import '../../models/product_model.dart';
+import '../checkout/checkout.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({super.key});
+  const ProductDetailScreen({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
-    THelperFunctions.isDarkMode(context);
+    THelperFunctions.isDarkMode();
     return  Scaffold(
-      bottomNavigationBar: const TBottomAddToCart(),
+      bottomNavigationBar: TBottomAddToCart(product: product),
       body: SingleChildScrollView(
         child: Column(
           children: [
 
             ///  -- Product Image Slider
-            const TProductImageSlider(),
+            TProductImageSlider(product: product),
 
             /// -- Product Details
             Padding(
@@ -36,27 +41,27 @@ class ProductDetailScreen extends StatelessWidget {
                   /// Rating &Share Button
                   const TRatingAndShare(),
                   /// Price, Title, Stock & Brand
-                  const TProductMetaData(),
+                  TProductMetaData(product: product),
 
                   /// Attributes
-                  const TProductAttributes(),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  if(product.productType == ProductType.variable.toString()) TProductAttributes(product: product),
+                  if(product.productType == ProductType.variable.toString()) const SizedBox(height: TSizes.spaceBtwSections),
 
                   /// Checkout Button
-                  SizedBox(width: double.infinity, child: ElevatedButton(onPressed: (){}, child: const Text('Checkout'))),
+                  SizedBox(width: double.infinity, child: ElevatedButton(onPressed: () => Get.to(() => const CheckoutScreen()), child: const Text('Checkout'))),
                   const SizedBox(height: TSizes.spaceBtwSections),
 
                   /// Description
                   const TSectionHeading(title: 'Description', showActionButton: false),
                   const SizedBox(height: TSizes.spaceBtwItems),
-                  const ReadMoreText(
-                    'This is a Product description for Blue Nike Sleeve vest. There are more things that can be added but i am busy at the moment with the code',
+                  ReadMoreText(
+                    product.description ?? '',
                     trimLines: 2,
                     trimMode: TrimMode.Line,
                     trimCollapsedText: ' Show more',
                     trimExpandedText: ' Less',
-                    moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
-                    lessStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                    moreStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                    lessStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
                   ),
 
                   /// Reviews

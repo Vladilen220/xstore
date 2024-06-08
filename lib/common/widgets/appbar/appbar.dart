@@ -6,6 +6,8 @@ import 'package:xstore/utils/constants/sizes.dart';
 import 'package:xstore/utils/device/device_utility.dart';
 import 'package:xstore/utils/helpers/helper_functions.dart';
 
+import '../../../utils/helpers/theme_controller.dart';
+
 class TAppBar extends StatelessWidget implements PreferredSizeWidget {
   const TAppBar({super.key,
     this.title,
@@ -24,7 +26,9 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    //final dark = THelperFunctions.isDarkMode(context);
+    final ThemeController themeController = Get.find();
+    final dark = themeController.isDarkMode;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: TSizes.md),
       child: AppBar(

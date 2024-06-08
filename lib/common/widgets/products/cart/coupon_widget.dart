@@ -12,7 +12,7 @@ class TCouponCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final dark = THelperFunctions.isDarkMode();
     return TRoundedContainer(
       showBorder: true,
       backgroundColor: dark ? TColors.dark : TColors.white,

@@ -8,13 +8,17 @@ import '../../../../../utils/constants/sizes.dart';
 import '../../../../common/widgets/login_signup/form_divider.dart';
 import '../../../../common/widgets/login_signup/social_buttons.dart';
 import '../../../../utils/constants/text_strings.dart';
+import '../../../../utils/helpers/theme_controller.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final ThemeController themeController = Get.find();
+    final dark = themeController.isDarkMode;
+    //final dark = THelperFunctions.isDarkMode(context);
+
 
     return Scaffold(
       body: SingleChildScrollView(
